@@ -1,6 +1,7 @@
 {
   "name": "rankraft",
   "version": "0.1.0",
+  "packageManager": "pnpm@10.34.5",
   "description": "Official RankRaft AI API client. Server-side only \u2014 the API sends no CORS headers and your key must never reach a browser.",
   "keywords": [
     "rankraft",
