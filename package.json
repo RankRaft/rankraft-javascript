@@ -1,0 +1,71 @@
+{
+  "name": "rankraft",
+  "version": "0.1.0",
+  "description": "Official RankRaft AI API client. Server-side only \u2014 the API sends no CORS headers and your key must never reach a browser.",
+  "keywords": [
+    "rankraft",
+    "ai-visibility",
+    "answer-engine-optimization",
+    "aeo",
+    "geo",
+    "seo",
+    "api-client",
+    "sdk"
+  ],
+  "homepage": "https://docs.rankraft.ai",
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/RankRaft/rankraft-javascript.git"
+  },
+  "bugs": {
+    "url": "https://github.com/RankRaft/rankraft-javascript/issues"
+  },
+  "license": "MIT",
+  "author": "RankRaft AI",
+  "type": "module",
+  "engines": {
+    "node": ">=20"
+  },
+  "sideEffects": false,
+  "files": [
+    "dist",
+    "README.md",
+    "LICENSE"
+  ],
+  "main": "./dist/index.cjs",
+  "module": "./dist/index.js",
+  "types": "./dist/index.d.ts",
+  "exports": {
+    ".": {
+      "import": {
+        "types": "./dist/index.d.ts",
+        "default": "./dist/index.js"
+      },
+      "require": {
+        "types": "./dist/index.d.cts",
+        "default": "./dist/index.cjs"
+      }
+    },
+    "./package.json": "./package.json"
+  },
+  "publishConfig": {
+    "access": "public",
+    "provenance": true
+  },
+  "scripts": {
+    "build": "tsup",
+    "typecheck": "tsc --noEmit",
+    "test": "vitest run",
+    "check:version": "node scripts/check-version.mjs",
+    "spec:sync": "node scripts/sync-spec.mjs",
+    "check": "pnpm run typecheck && pnpm run test && pnpm run build && publint && attw --pack ."
+  },
+  "devDependencies": {
+    "@arethetypeswrong/cli": "^0.18.2",
+    "@types/node": "^22.20.3",
+    "publint": "^0.3.17",
+    "tsup": "^8.5.0",
+    "typescript": "^5.9.3",
+    "vitest": "^4.1.11"
+  }
+}

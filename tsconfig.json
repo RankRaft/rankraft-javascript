@@ -1,0 +1,32 @@
+{
+  // Deliberately not extending the monorepo's tsconfig.base.json.
+  //
+  // That base sets `moduleResolution: "Bundler"`, which permits extensionless
+  // relative imports. Those are invalid for a *published* package consumed
+  // under node16/nodenext resolution, so the base config would happily let us
+  // ship .d.ts files that fail to resolve for a large share of our customers.
+  // NodeNext here means tsc enforces, at author time, what the consumer's
+  // resolver will enforce at install time.
+  "compilerOptions": {
+    "target": "ES2022",
+    "lib": ["ES2022"],
+    "module": "NodeNext",
+    "moduleResolution": "NodeNext",
+    "types": ["node"],
+    "strict": true,
+    "noUncheckedIndexedAccess": true,
+    "exactOptionalPropertyTypes": false,
+    "noImplicitOverride": true,
+    "verbatimModuleSyntax": true,
+    "isolatedModules": true,
+    "esModuleInterop": true,
+    "skipLibCheck": true,
+    "resolveJsonModule": true,
+    "forceConsistentCasingInFileNames": true,
+    "declaration": true,
+    "declarationMap": true,
+    "sourceMap": true,
+    "noEmit": true
+  },
+  "include": ["src/**/*.ts", "test/**/*.ts", "scripts/**/*.mjs"]
+}

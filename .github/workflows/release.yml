@@ -1,0 +1,44 @@
+name: Release
+
+on:
+  push:
+    tags: ["v*"]
+
+permissions:
+  contents: write
+  id-token: write # npm trusted publishing; no long-lived token in this repo
+
+jobs:
+  verify:
+    # Re-run the whole of CI rather than trusting the commit's earlier green
+    # run — the tag may not point at what was tested.
+    uses: ./.github/workflows/ci.yml
+
+  publish:
+    needs: verify
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - uses: pnpm/action-setup@v4
+      - uses: actions/setup-node@v4
+        with:
+          node-version: 22
+          cache: pnpm
+          registry-url: https://registry.npmjs.org
+      - run: pnpm install --frozen-lockfile
+      - id: version
+        run: echo "version=$(node scripts/check-version.mjs "${GITHUB_REF_NAME}")" >> "$GITHUB_OUTPUT"
+      - run: pnpm run build
+      - name: Publish to npm
+        # Gated on a repository variable so this workflow can be merged and
+        # tagged before the registry account exists. Same reason the main
+        # repo's WordPress release is gated on WP_ORG_DEPLOY.
+        if: ${{ vars.NPM_PUBLISH == 'true' }}
+        run: pnpm publish --no-git-checks --provenance --access public
+      - name: Say so when publishing was skipped
+        if: ${{ vars.NPM_PUBLISH != 'true' }}
+        run: echo "::notice::NPM_PUBLISH is not 'true', so v${{ steps.version.outputs.version }} was built but not published."
+      - uses: softprops/action-gh-release@v2
+        with:
+          name: rankraft ${{ steps.version.outputs.version }}
+          generate_release_notes: true
