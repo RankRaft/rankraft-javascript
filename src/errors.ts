@@ -74,7 +74,7 @@ export class APIError extends RankRaftError {
     ]
       .filter(Boolean)
       .join(", ");
-    super(`rankraft ${init.status} ${init.code} — ${init.message}${suffix ? ` (${suffix})` : ""}`);
+    super(`rankraft ${init.status} ${init.code}: ${init.message}${suffix ? ` (${suffix})` : ""}`);
     this.status = init.status;
     this.code = init.code;
     this.details = init.details;
@@ -150,7 +150,7 @@ export const ERROR_CODE_CLASSES: Record<string, typeof APIError> = {
   site_not_set_up: ConflictError,
   payload_too_large: PayloadTooLargeError,
   unsupported_media_type: BadRequestError,
-  // 422 — all validation, one of them with structured details
+  // 422 - all validation, one of them with structured details
   invalid_request: ValidationError,
   invalid_filter: ValidationError,
   invalid_date_range: ValidationError,
@@ -176,8 +176,8 @@ const STATUS_CLASSES: Record<number, typeof APIError> = {
 export function errorFrom(init: APIErrorInit): APIError {
   const byCode = ERROR_CODE_CLASSES[init.code];
   if (byCode) return new byCode(init);
-  // 403 is ambiguous by status alone — plan_required and
-  // insufficient_permission share it — so the code above is what distinguishes
+  // 403 is ambiguous by status alone - plan_required and
+  // insufficient_permission share it - so the code above is what distinguishes
   // them and this is only the fallback.
   const byStatus = STATUS_CLASSES[init.status] ?? (init.status >= 500 ? InternalServerError : APIError);
   return new byStatus(init);

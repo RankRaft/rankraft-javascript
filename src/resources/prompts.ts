@@ -21,7 +21,7 @@ import type {
  * continuous series.
  *
  * The write endpoints answer `{ dry_run, created, …, data }` rather than the
- * usual `{ info, data }`, and the fields beside `data` are the point — so
+ * usual `{ info, data }`, and the fields beside `data` are the point - so
  * these methods return the whole body, not the unwrapped `data`.
  */
 export class PromptsResource {

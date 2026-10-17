@@ -16,7 +16,7 @@ export class SitesResource {
   /**
    * One site.
    *
-   * A site id belonging to another organization returns 404, never 403 — the
+   * A site id belonging to another organization returns 404, never 403 - the
    * API refuses to confirm that an id exists. `NotFoundError` therefore means
    * "no such site in this organization", not necessarily "no such site".
    */

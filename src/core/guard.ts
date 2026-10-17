@@ -4,8 +4,8 @@ import { BrowserEnvironmentError } from "../errors.js";
  * Refuse to be constructed in a browser.
  *
  * This fails at construction rather than at the first request on purpose. The
- * key leaks at *bundle* time — it is in the JavaScript every visitor
- * downloads — long before any request is made, and the request itself would
+ * key leaks at *bundle* time - it is in the JavaScript every visitor
+ * downloads - long before any request is made, and the request itself would
  * only produce an opaque "TypeError: Failed to fetch" from the CORS preflight,
  * which tells the developer nothing about what they have just published.
  *
@@ -26,7 +26,7 @@ Two separate problems, both fatal:
   2. api.rankraft.ai sends no CORS headers, deliberately. The request would be
      blocked by the browser before it was ever sent.
 
-Call RankRaft AI from your server instead — a route handler, a server action, a
+Call RankRaft AI from your server instead - a route handler, a server action, a
 Cloudflare Worker, or a backend job.
 
 If you are in a browser extension or an Electron main process, where CORS does

@@ -4,8 +4,7 @@ import { RankRaft } from "../src/index.js";
 /**
  * One real call per endpoint against a staging Enterprise organization.
  *
- * This is the only check on behaviour the OpenAPI document cannot express —
- * above all whether the cursor really does survive a re-sent body, which is
+ * This is the only check on behaviour the OpenAPI document cannot express - * above all whether the cursor really does survive a re-sent body, which is
  * the single assumption this client cannot verify any other way. Run it
  * before every release.
  *

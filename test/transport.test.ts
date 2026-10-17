@@ -81,7 +81,7 @@ describe("transport", () => {
   });
 
   it("returns the whole body for prompt writes, whose fields sit beside data", async () => {
-    // `{ dry_run, created, existing, data }` — unwrapping to `data` alone
+    // `{ dry_run, created, existing, data }` - unwrapping to `data` alone
     // would silently drop the counts the caller asked for.
     const { fetch, calls } = fakeFetch([{ body: { dry_run: true, created: 1, existing: 0, data: [{ text: "x", status: "active" }] } }]);
     const result = await client(fetch).prompts.create({ site_id: "s1", prompts: [{ text: "x" }], dry_run: true });

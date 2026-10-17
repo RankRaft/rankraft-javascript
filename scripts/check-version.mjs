@@ -1,6 +1,6 @@
 #!/usr/bin/env node
 /**
- * One version, four places, asserted to agree — and, with a tag argument, to
+ * One version, four places, asserted to agree - and, with a tag argument, to
  * agree with the tag as well. Modelled on the WordPress plugin's own
  * check-version.mjs, which exists for the same reason: the same fact in
  * several files is only safe when something fails loudly when they diverge.

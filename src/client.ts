@@ -27,7 +27,7 @@ export interface RankRaftOptions {
    *
    * A 429 carries `Retry-After: 60` and the window has no remaining-count
    * header, so honouring it means a real 60-second pause. Default 70s, which
-   * permits exactly one rate-limit retry and then raises — a library that
+   * permits exactly one rate-limit retry and then raises - a library that
    * silently blocks for two minutes is hostile.
    */
   maxRetryWaitMs?: number;
@@ -92,12 +92,12 @@ export class RankRaft {
         "rankraft: no API key. Pass { apiKey } or set RANKRAFT_API_KEY. Create a key in the dashboard under Settings → API.",
       );
     }
-    // The prefix only — never the full shape, which a pinned client must not
+    // The prefix only - never the full shape, which a pinned client must not
     // enforce. This catches the one mistake that is otherwise a confusing
     // 401: pasting a site key (`rr_live_…`) where an API key belongs.
     if (!apiKey.startsWith(KEY_PREFIX)) {
       throw new ConfigurationError(
-        `rankraft: that is not an API key — API keys start with "${KEY_PREFIX}". A site key (rr_live_…) is for sending traffic, not reading it.`,
+        `rankraft: that is not an API key - API keys start with "${KEY_PREFIX}". A site key (rr_live_…) is for sending traffic, not reading it.`,
       );
     }
 
@@ -178,7 +178,7 @@ export class RankRaft {
    * Paginate a POST whose cursor lives in the body.
    *
    * `baseBody` is serialised once per page by `serializeWithCursor`, which
-   * drops any cursor and appends the live one last — so every page's bytes are
+   * drops any cursor and appends the live one last - so every page's bytes are
    * identical apart from one trailing field, which is what the server's
    * body-hash-bound cursor requires.
    */

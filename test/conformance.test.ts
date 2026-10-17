@@ -7,12 +7,12 @@ import { ERROR_CODE_CLASSES, OPERATIONS } from "../src/index.js";
  * The SDK against the published contract.
  *
  * This is the only thing standing between a hand-written client and silent
- * drift. It is what catches the failure mode that matters most — the API grows
+ * drift. It is what catches the failure mode that matters most - the API grows
  * an endpoint and nobody here ever learns.
  *
  * `spec/openapi.json` is vendored by `pnpm spec:sync` and refreshed by a daily
  * workflow that opens a PR on any change. Until the API Worker ships there is
- * nothing to fetch, so this suite skips — loudly, never silently, which is the
+ * nothing to fetch, so this suite skips - loudly, never silently, which is the
  * same bargain the main repo strikes with its PHP suite when php is absent.
  */
 

@@ -7,7 +7,7 @@
 
 <h1 align="center">rankraft</h1>
 
-<p align="center">Official Node.js client for the <a href="https://rankraft.ai">RankRaft AI</a> API — how AI answer engines and AI crawlers see your brand.</p>
+<p align="center">Official Node.js client for the <a href="https://rankraft.ai">RankRaft AI</a> API - how AI answer engines and AI crawlers see your brand.</p>
 
 <p align="center">
   <a href="https://rankraft.ai"><b>rankraft.ai</b></a> &nbsp;·&nbsp;
@@ -49,7 +49,7 @@ const page = await rr.reports.visibility({
 console.log(page.info.total_results, page.data);
 ```
 
-Numbers here equal the numbers on your dashboard by construction — both are
+Numbers here equal the numbers on your dashboard by construction - both are
 scored by the same package, not by two implementations of the same formula.
 
 ## Pagination
@@ -74,7 +74,7 @@ The cursor carries a fingerprint of the query that produced it (every field
 except `cursor` and `limit`, canonicalised). The client freezes the body it
 sent on page one and re-sends it with only `cursor` substituted, so the
 fingerprint always matches. Change the filter, range, grouping or metrics
-between pages and the API answers `InvalidCursorError` — start again without a
+between pages and the API answers `InvalidCursorError` - start again without a
 cursor. `limit` may change between pages.
 
 ## Errors
@@ -98,16 +98,16 @@ trace is enough for support.
 | Class | Status · `code` |
 |---|---|
 | `BadRequestError` | 400 · `invalid_json`, `api_key_in_url` |
-| `InvalidCursorError` | 400 · `invalid_cursor` — the query changed between pages |
-| `AuthenticationError` | 401 · `invalid_api_key` — missing, unknown, revoked or expired; deliberately one message |
-| `PlanRequiredError` | 403 · `plan_required` — not on a live Enterprise plan |
-| `PermissionDeniedError` | 403 · `insufficient_permission` — a read key tried to write |
-| `NotFoundError` | 404 · `not_found` — no such site **in this organization** (never 403, so ids can't be enumerated) |
-| `ConflictError` | 409 · `site_not_set_up` — finish the site's brand profile in the dashboard first |
-| `PayloadTooLargeError` | 413 · `payload_too_large` — bodies are capped at 256 KB |
-| `ValidationError` | 422 · `invalid_request`, `invalid_filter`, `invalid_date_range`, `invalid_timezone`, `invalid_sort` — `err.issues` has the detail |
-| `PromptLimitError` | 422 · `prompt_limit_reached` — `err.remaining` and `err.limit` |
-| `RateLimitError` | 429 · `rate_limited` — `err.retryAfterSeconds` |
+| `InvalidCursorError` | 400 · `invalid_cursor` - the query changed between pages |
+| `AuthenticationError` | 401 · `invalid_api_key` - missing, unknown, revoked or expired; deliberately one message |
+| `PlanRequiredError` | 403 · `plan_required` - not on a live Enterprise plan |
+| `PermissionDeniedError` | 403 · `insufficient_permission` - a read key tried to write |
+| `NotFoundError` | 404 · `not_found` - no such site **in this organization** (never 403, so ids can't be enumerated) |
+| `ConflictError` | 409 · `site_not_set_up` - finish the site's brand profile in the dashboard first |
+| `PayloadTooLargeError` | 413 · `payload_too_large` - bodies are capped at 256 KB |
+| `ValidationError` | 422 · `invalid_request`, `invalid_filter`, `invalid_date_range`, `invalid_timezone`, `invalid_sort` - `err.issues` has the detail |
+| `PromptLimitError` | 422 · `prompt_limit_reached` - `err.remaining` and `err.limit` |
+| `RateLimitError` | 429 · `rate_limited` - `err.retryAfterSeconds` |
 | `InternalServerError` | 5xx · `internal_error` |
 
 A code this client does not know falls back to the class for its status, so a
@@ -118,7 +118,7 @@ new server-side code never crashes a pinned install.
 On by default, two attempts after the first.
 
 - A **429 is always retried**, because the limiter rejects before the handler
-  runs, so nothing happened. `Retry-After` is honoured **exactly** — the window
+  runs, so nothing happened. `Retry-After` is honoured **exactly** - the window
   has no remaining-count header, so retrying early is guaranteed to fail and
   spends another request from your budget.
 - Everything else is retried only when the operation is safe to replay. That is
@@ -138,8 +138,7 @@ const rr = new RankRaft({
 
 ## Writing prompts
 
-Prompts are the only thing this API writes, and it cannot delete them —
-deleting cascades away answer history and any Action Center baseline that
+Prompts are the only thing this API writes, and it cannot delete them - deleting cascades away answer history and any Action Center baseline that
 targeted the prompt.
 
 ```ts
@@ -174,7 +173,7 @@ f.and(
 );
 ```
 
-Operators: `is`, `not_is`, `in`, `not_in`, `contains`, `not_contains` — all
+Operators: `is`, `not_is`, `in`, `not_in`, `contains`, `not_contains` - all
 case-insensitive. Values are strings on the wire; the builder stringifies
 numbers and booleans for you (`f.is("verified", true)` sends `"true"`).
 
@@ -184,7 +183,7 @@ traffic reports take `bot_name`, `bot_provider`, `bot_type`, `verified`,
 `path`, `page_type` and `referral_source`.
 
 The builder checks grammar and nothing else. Depth, list length, `limit` and
-date spans are the server's limits and are not duplicated here — a copy in the
+date spans are the server's limits and are not duplicated here - a copy in the
 client is a copy that goes stale, and the 422 carries the real number.
 
 ## Why there is no browser build
@@ -196,7 +195,7 @@ Two separate problems, both fatal:
 2. `api.rankraft.ai` sends no CORS headers. The request would be blocked before
    it was sent.
 
-So the client throws at construction — not at the first request, because the key
+So the client throws at construction - not at the first request, because the key
 leaks at bundle time, long before any request is made. In a browser extension or
 an Electron main process, pass `{ dangerouslyAllowBrowser: true }`.
 
@@ -211,11 +210,11 @@ an Electron main process, pass `{ dangerouslyAllowBrowser: true }`.
 | `maxRetryWaitMs` | `70000`, total sleep per call |
 | `fetch` | global `fetch` |
 | `defaultHeaders` | `{}` |
-| `userAgentSuffix` | — |
-| `onRetry` | — |
+| `userAgentSuffix` | - |
+| `onRetry` | - |
 | `dangerouslyAllowBrowser` | `false` |
 
-Requires **Node 20+**, or any runtime with `fetch` — Cloudflare Workers, Deno
+Requires **Node 20+**, or any runtime with `fetch` - Cloudflare Workers, Deno
 and Bun included. Zero runtime dependencies. ESM and CommonJS.
 
 ## The MCP server
@@ -245,4 +244,4 @@ MIT
 
 ---
 
-RankRaft AI — [rankraft.ai](https://rankraft.ai) · [docs.rankraft.ai](https://docs.rankraft.ai) · hello@rankraft.ai
+RankRaft AI - [rankraft.ai](https://rankraft.ai) · [docs.rankraft.ai](https://docs.rankraft.ai) · hello@rankraft.ai

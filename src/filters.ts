@@ -1,7 +1,7 @@
 /**
  * The filter tree, and a small builder for it.
  *
- * Raw objects are accepted everywhere a filter is — that is the escape hatch
+ * Raw objects are accepted everywhere a filter is - that is the escape hatch
  * when the API grows an operator before this client does, and it is what an
  * LLM driving an MCP server will produce. The builder exists for everyone else.
  *
@@ -25,7 +25,7 @@ export type FilterInput = string | number | boolean;
 
 /**
  * Open unions on purpose. A misspelling is a compile error, while a field or
- * engine shipped after this release still works — a pinned client must never
+ * engine shipped after this release still works - a pinned client must never
  * throw because the API added something.
  */
 export type AnswerFilterField = "platform" | "prompt" | "category" | (string & {});
@@ -105,8 +105,7 @@ export function validateFilter(node: unknown, path = "filter"): void {
   }
 }
 
-// Keys are emitted in a fixed {field, op, value} order and never re-sorted —
-// key order may be load-bearing for the server's cursor hash.
+// Keys are emitted in a fixed {field, op, value} order and never re-sorted - // key order may be load-bearing for the server's cursor hash.
 const leaf = (field: string, op: FilterOp, value: FilterScalar | FilterScalar[]): FilterLeaf => ({ field, op, value });
 const str = (v: FilterInput): string => String(v);
 

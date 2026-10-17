@@ -6,7 +6,7 @@ import type { FilterNode } from "./filters.js";
  * compares the operation table against the published OpenAPI document.
  *
  * Enums are open (`| (string & {})`) so a platform or metric the API ships
- * tomorrow cannot throw inside a customer's pinned install — that drift is
+ * tomorrow cannot throw inside a customer's pinned install - that drift is
  * meant to surface in our CI, not theirs.
  *
  * Report rows carry every metric optionally because the row shape is chosen
